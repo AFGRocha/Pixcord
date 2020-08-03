@@ -20,7 +20,7 @@ function save_options() {
   function restore_options() {
     chrome.storage.sync.get({
         name: 'Pixcord',
-        discordImage: 'blue'
+        discordImage: 'https://i.imgur.com/VQFaBcn.png'
     }, function(items) {
       document.getElementById('discordName').value = items.name;
       document.getElementById('discordIMG').value = items.discordImage;
