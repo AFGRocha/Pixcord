@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(function (res) {
 
 
     let firstStep = document.getElementsByClassName('sc-1asno00-0 iyBsWP')[0].innerHTML.replace('<img src="', '');
-    let profileImg = firstStep.replace('" width="40" height="40" alt="' + document.getElementsByClassName('sc-fzpisO fazQzW')[0].innerHTML + '" style="object-fit: cover; object-position: center top;">', '')
+    let profileImg = firstStep.replace('" width="40" height="40" alt="' + document.getElementsByClassName('sc-fzpisO')[0].innerHTML + '" style="object-fit: cover; object-position: center top;">', '')
     var dataFields2 = new FormData();
     dataFields2.append('image', profileImg);
     dataFields2.append('type', 'URL');
@@ -52,12 +52,12 @@ chrome.runtime.onMessage.addListener(function (res) {
                     content: "",
                     embeds: [
                         {
-                            "title": document.getElementsByClassName('sc-1u8nu73-3 feoVvS')[0].innerHTML,
+                            "title": document.getElementsByClassName('sc-1u8nu73-3')[0].innerHTML,
                             "url": location.href,
                             "color": 7506394,
                             "author": {
-                                "name": document.getElementsByClassName('sc-fzpisO fazQzW')[0].innerHTML,
-                                "url": document.getElementsByClassName('sc-fzpisO fazQzW')[0].href,
+                                "name": document.getElementsByClassName('sc-fzpisO')[0].innerHTML,
+                                "url": document.getElementsByClassName('sc-fzpisO')[0].href,
                                 "icon_url": profileJSON.data.link
                             },
                             "footer": {
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener(function (res) {
                         }
                     ]
                 }
-
+                console.log(JSON.stringify(params))
                 request.send(JSON.stringify(params));
                 alert("Shared")
 
