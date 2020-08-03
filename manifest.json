@@ -1,6 +1,6 @@
 {
     "name": "Pixcord Closed EN Build",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "manifest_version": 2,
     "content_scripts": [
         {
@@ -12,6 +12,9 @@
             ]
         }
     ],
+    "icons": { "16": "pixcord-icon.png",
+        "48": "pixcord-icon.png",
+       "128": "pixcord-icon.png" },
     "browser_action": {
         "default_popup": "popup.html",
         "default_title": "Pixcord"
