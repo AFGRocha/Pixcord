@@ -1,0 +1,32 @@
+#PixcordSFW {
+    background: #0078C8;
+    border-radius: 8px;
+    border: none;
+}
+
+#PixcordNSFW {
+    background: #FF4747;
+    border-radius: 8px;
+    border: none;
+}
+
+
+.spinning-loader {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.692);
+    border-left-color: rgb(184, 182, 182);
+    background: transparent;
+    animation: rotate-s-loader 1s linear infinite;
+    margin: 6rem auto;
+  }
+
+  @keyframes rotate-s-loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

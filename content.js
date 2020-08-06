@@ -2,10 +2,17 @@ chrome.runtime.onMessage.addListener(function (res) {
 
     //Beta for the share button inside the page
     if(res == "discord"){
-        function artShare(webhook){
+        function artShare(webhook,type){
+            let button;
+            if(type == "sfw")
+            button = document.getElementById("PixcordSFW");
+            else if (type == "nsfw")
+            button = document.getElementById("PixcordNSFW")
+
+            button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">'
             var request = new XMLHttpRequest();
             request.open("POST", webhook);
-            // replace the url in the "open" method with yours
+
             var xhr = new XMLHttpRequest();
             var xhr2 = new XMLHttpRequest();
 
@@ -32,10 +39,10 @@ chrome.runtime.onMessage.addListener(function (res) {
             dataFields2.append('type', 'URL');
 
 
-            console.log(profileImg)
+
             xhr.onloadend = function (evt) {
                 var responseJSON = JSON.parse(xhr.responseText);
-                //console.log(JSON.stringify(responseJSON.data));
+
 
                 xhr2.send(dataFields2)
                 xhr2.onloadend = function (evt) {
@@ -45,10 +52,8 @@ chrome.runtime.onMessage.addListener(function (res) {
                     //get name and profile pic
                     chrome.storage.sync.get({
                         name: 'Pixcord',
-                        discordImage: 'blue'
+                        discordImage: 'https://i.imgur.com/VQFaBcn.png'
                     }, function (items) {
-                        //document.getElementById('discordName').value = items.name;
-                        //document.getElementById('discordIMG').value = items.discordImage;
 
                         var params = {
                             username: items.name,
@@ -74,9 +79,8 @@ chrome.runtime.onMessage.addListener(function (res) {
                                 }
                             ]
                         }
-                        console.log(JSON.stringify(params))
                         request.send(JSON.stringify(params));
-                        alert("Shared")
+                        button.innerHTML = '✔️Shared'
 
 
                     })
@@ -88,39 +92,48 @@ chrome.runtime.onMessage.addListener(function (res) {
             };
 
             xhr.onerror = function (err) { // untested
-                // console.log('Failed uploading image from ' + fileName + ': ' + JSON.stringify(err));
+                //console.log('Failed uploading image from ' + fileName + ': ' + JSON.stringify(err));
                 //console.log('Output: ' + xhr.responseText);
                 alert("Pixcord Upload Error")
             };
         }
 
         if(!document.getElementById("PixcordSFW")){
+            //Creating the first div
+            let divSFW = document.createElement("div");
+            divSFW.className = "sc-181ts2x-3 iujCSd"
+
+
             //SFW Button
             let sfw = document.createElement("BUTTON");  // Create a <button> node
             sfw.setAttribute("id", "PixcordSFW")
-            sfw.className = "js-click-trackable _2Of8xxg Pixcord"
             sfw.onclick = function () {
-                artShare("https://discordapp.com/api/webhooks/547508568849383426/3ceqXPSXNmnEHikyR65GL0UHTJoASHZWeu49Re5IhBYszSjMwDv8hfspWFso_SoQ4SBI")
+                artShare("https://discordapp.com/api/webhooks/547508568849383426/3ceqXPSXNmnEHikyR65GL0UHTJoASHZWeu49Re5IhBYszSjMwDv8hfspWFso_SoQ4SBI","sfw")
             };
             let t = document.createTextNode("Share to #art");      // Create a text node
             sfw.appendChild(t);                                          // Append the text to <p>
-            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(sfw);           // Append to <div>
+            divSFW.appendChild(sfw);
+            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divSFW);           // Append to <div>
+
+            //Second div
+            let divNSFW = document.createElement("div");
+            divNSFW.className = "sc-181ts2x-3 iujCSd"
 
             //NSFW Button
             let nsfw = document.createElement("BUTTON");  // Create a <button> node
             nsfw.setAttribute("id", "PixcordNSFW")
-            nsfw.className = "js-click-trackable _2Of8xxg Pixcord"
             nsfw.onclick = function () {
-                artShare("https://discordapp.com/api/webhooks/738107690672324639/GQeX-g04uhrHrLbxM4qV2E1ePRbUeXZd9xwX7lJCVcJDtrY-Bs3pSA15mm2cjoewQjxb")
+                artShare("https://discordapp.com/api/webhooks/738107690672324639/GQeX-g04uhrHrLbxM4qV2E1ePRbUeXZd9xwX7lJCVcJDtrY-Bs3pSA15mm2cjoewQjxb","nsfw")
             };
             let t2 = document.createTextNode("Share to #NSFW");      // Create a text node
-            nsfw.appendChild(t2);                                          // Append the text to <p>
-            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(nsfw);           // Append to <div>
+            nsfw.appendChild(t2);  // Append the text to <p>
+            divNSFW.appendChild(nsfw)
+            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divNSFW);           // Append to <div>
         }
     } else{ //Sharing through the popup
         var request = new XMLHttpRequest();
         request.open("POST", res);
-        // replace the url in the "open" method with yours
+
         var xhr = new XMLHttpRequest();
         var xhr2 = new XMLHttpRequest();
 
@@ -147,10 +160,10 @@ chrome.runtime.onMessage.addListener(function (res) {
         dataFields2.append('type', 'URL');
 
 
-        console.log(profileImg)
+
         xhr.onloadend = function (evt) {
             var responseJSON = JSON.parse(xhr.responseText);
-            //console.log(JSON.stringify(responseJSON.data));
+
 
             xhr2.send(dataFields2)
             xhr2.onloadend = function (evt) {
@@ -189,7 +202,6 @@ chrome.runtime.onMessage.addListener(function (res) {
                             }
                         ]
                     }
-                    console.log(JSON.stringify(params))
                     request.send(JSON.stringify(params));
                     alert("Shared")
 
@@ -203,7 +215,7 @@ chrome.runtime.onMessage.addListener(function (res) {
         };
 
         xhr.onerror = function (err) { // untested
-            // console.log('Failed uploading image from ' + fileName + ': ' + JSON.stringify(err));
+            //console.log('Failed uploading image from ' + fileName + ': ' + JSON.stringify(err));
             //console.log('Output: ' + xhr.responseText);
             alert("Pixcord Upload Error")
         };
