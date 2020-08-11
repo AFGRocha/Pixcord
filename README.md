@@ -8,7 +8,7 @@ That's where **Pixcord** comes in! Pixcord is a Chrome extension (compatible wit
 
 ## Demonstration
 
-![Demo](https://i.imgur.com/FOtlo69.gif)
+[Demo](https://i.imgur.com/FOtlo69.gif)
 
 
 
