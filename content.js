@@ -37,8 +37,10 @@ chrome.runtime.onMessage.addListener(function (res) {
             var dataFields2 = new FormData();
             dataFields2.append('image', profileImg);
             dataFields2.append('type', 'URL');
+            let artTitle = "Untitled"
 
-
+            if(document.getElementsByClassName('sc-1u8nu73-3')[0])
+                artTitle = document.getElementsByClassName('sc-1u8nu73-3')[0].innerHTML
 
             xhr.onloadend = function (evt) {
                 var responseJSON = JSON.parse(xhr.responseText);
@@ -61,7 +63,7 @@ chrome.runtime.onMessage.addListener(function (res) {
                             content: "",
                             embeds: [
                                 {
-                                    "title": document.getElementsByClassName('sc-1u8nu73-3')[0].innerHTML,
+                                    "title": artTitle ,
                                     "url": location.href,
                                     "color": 7506394,
                                     "author": {
