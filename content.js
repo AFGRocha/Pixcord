@@ -1,13 +1,14 @@
 chrome.runtime.onMessage.addListener(function (res) {
 
     //Beta for the share button inside the page
-    if(res == "discord"){
-        function artShare(webhook,type){
-            let button;
-            if(type == "sfw")
-            button = document.getElementById("PixcordSFW");
-            else if (type == "nsfw")
-            button = document.getElementById("PixcordNSFW")
+    let button;
+    if (type) {
+      button =
+        type === 'sfw'
+          ? document.getElementById('PixcordSFW')
+          : document.getElementById('PixcordNSFW');
+      button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
+    }
 
     var request = new XMLHttpRequest();
     request.open('POST', webhook);
