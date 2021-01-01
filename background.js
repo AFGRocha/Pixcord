@@ -1,4 +1,15 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  chrome.tabs.sendMessage(tabId, 'pixiv page');
+});
+
+chrome.runtime.onMessage.addListener(function (req, sender, sendResponse) {
+  if (req.webhook) {
+    const { data, webhook, type } = req;
+    artShare(data, webhook, type).then(sendResponse);
+    return true;
+  }
+});
+
 async function artShare(data, webhook, type) {
   try {
     const artFile = await dataUrlToFile(
