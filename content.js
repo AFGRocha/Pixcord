@@ -194,4 +194,20 @@ function getArtInfo() {
     title
   };
 }
-});
+async function getImg64(img) {
+  return new Promise((resolve, reject) => {
+    let image = new Image();
+    image.src = 'https://cors-anywhere.herokuapp.com/' + img.src;
+    image.crossOrigin = 'anonymous';
+    image.onload = () => {
+      let canvas = document.createElement('CANVAS');
+      const ctx = canvas.getContext('2d');
+      canvas.height = image.height;
+      canvas.width = image.width;
+      ctx.drawImage(image, 0, 0);
+      const dataURL = canvas.toDataURL('image/jpeg', 0.6);
+      canvas = null;
+      resolve(dataURL);
+    };
+  });
+}
