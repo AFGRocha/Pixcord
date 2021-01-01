@@ -1,4 +1,9 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+async function dataUrlToFile(dataUrl, fileName) {
+  const res = await fetch(dataUrl);
+  const blob = await res.blob();
+  return new File([blob], fileName, { type: 'image/jpeg' });
+}
 async function getLocalStorageValue(key) {
   return new Promise((resolve, reject) => {
     try {
