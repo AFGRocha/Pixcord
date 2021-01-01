@@ -1,14 +1,11 @@
-chrome.runtime.onMessage.addListener(function (res) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   //Beta for the share button inside the page
-  function artShare(webhook, type) {
-    let button;
-    if (type) {
-      button =
-        type === 'sfw'
-          ? document.getElementById('PixcordSFW')
-          : document.getElementById('PixcordNSFW');
-      button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
-    }
+  if (request === 'pixiv page') {
+    makeButtons();
+  } else if (request.webhook) {
+    sendData(request.webhook, request.type);
+  }
+});
 
 function makeButtons() {
   if (!document.getElementById('PixcordSFW')) {
