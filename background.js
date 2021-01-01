@@ -1,4 +1,63 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+async function artShare(data, webhook, type) {
+  try {
+    const artFile = await dataUrlToFile(
+      data.art,
+      `${data.profileName} - ${data.title}`
+    );
+    const iconFile = await dataUrlToFile(
+      data.profileImg,
+      `${data.profileName}`
+    );
+
+    const files = [artFile, iconFile];
+    const urls = await upload(files);
+
+    const name = await getLocalStorageValue('name');
+    const discordImage = await getLocalStorageValue('discordImage');
+
+    var params = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: name,
+        avatar_url: discordImage,
+        content: '',
+        embeds: [
+          {
+            title: data.title,
+            url: data.artUrl,
+            color: 7506394,
+            author: {
+              profileName: data.profileName,
+              url: data.profileLink,
+              icon_url: urls[1]
+            },
+            footer: {
+              text: 'Pixcord developed by @DaikiPT'
+            },
+            timestamp: new Date(),
+            image: {
+              url: urls[0]
+            }
+          }
+        ]
+      })
+    };
+
+    const res = await fetch(webhook, params);
+
+    if (res.status === 204) {
+      return { message: 'success', type };
+    }
+  } catch (error) {
+    console.error({ error });
+    return { message: 'error' };
+  }
+}
+
 async function dataUrlToFile(dataUrl, fileName) {
   const res = await fetch(dataUrl);
   const blob = await res.blob();
