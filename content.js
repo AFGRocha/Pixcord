@@ -211,3 +211,53 @@ async function getImg64(img) {
     };
   });
 }
+
+async function sendData(webhook, type) {
+  let button =
+    type === 'sfw'
+      ? document.getElementById('PixcordSFW')
+      : document.getElementById('PixcordNSFW');
+  button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
+
+  const {
+    artUrl,
+    profileLink,
+    profileImg,
+    profileName,
+    art,
+    title
+  } = getArtInfo();
+
+  try {
+    art64 = await getImg64(art);
+    profile64 = await getImg64(profileImg);
+
+    chrome.runtime.sendMessage(
+      {
+        data: {
+          artUrl,
+          profileLink,
+          profileImg: profile64,
+          profileName,
+          art: art64,
+          title
+        },
+        webhook,
+        type
+      },
+      function (res) {
+        const button =
+          res.type === 'sfw'
+            ? document.querySelector('#PixcordSFW')
+            : document.querySelector('#PixcordNSFW');
+        if (res.message === 'success') {
+          button.innerHTML = '✔️Shared';
+        } else {
+          button.innerHtml = '❌Error';
+        }
+      }
+    );
+  } catch (error) {
+    console.error({ error });
+  }
+}
