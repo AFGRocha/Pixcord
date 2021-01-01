@@ -161,4 +161,37 @@ chrome.runtime.onMessage.addListener(function (res) {
         .appendChild(divNSFW); // Append to <div>
     }
   }
+function getArtInfo() {
+  // let firstStep = document
+  //   .getElementsByClassName('sc-1asno00-0 iyBsWP')[0]
+  //   .innerHTML.replace('<img src="', '');
+  // let profileImg = firstStep.replace(
+  //   '" width="40" height="40" alt="' +
+  //     document.getElementsByClassName('sc-fzozJi daCWkW')[0].innerText +
+  //     '" style="object-fit: cover; object-position: center top;">',
+  //   ''
+  // );
+  const artUrl = location.href;
+  const profileLinks = document
+    .querySelector('aside')
+    .querySelectorAll('a[href^="/en/users/"]');
+  const profileImg =
+    profileLinks[0].querySelector('figure') ||
+    profileLinks[0].querySelector('img');
+  const profileName = profileLinks[1].innerText;
+
+  const art = document.querySelector('main section figure img');
+
+  const artDescription = document.querySelector('figcaption');
+  const title = artDescription.querySelector('h1').innerText || 'Untitled';
+
+  return {
+    profileLink: profileLinks[0].href,
+    profileImg,
+    profileName,
+    artUrl,
+    art,
+    title
+  };
+}
 });
