@@ -1,5 +1,7 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  chrome.tabs.sendMessage(tabId, 'pixiv page');
+  if (tab.url.includes('artworks')) {
+    chrome.tabs.sendMessage(tabId, 'pixiv artwork page');
+  }
 });
 
 chrome.runtime.onMessage.addListener(function (req, sender, sendResponse) {
@@ -12,6 +14,7 @@ chrome.runtime.onMessage.addListener(function (req, sender, sendResponse) {
 
 async function artShare(data, webhook, type) {
   try {
+    console.log('data: ', data);
     const artFile = await dataUrlToFile(
       data.art,
       `${data.profileName} - ${data.title}`
@@ -23,6 +26,7 @@ async function artShare(data, webhook, type) {
 
     const files = [artFile, iconFile];
     const urls = await upload(files);
+    console.log('urls: ', urls);
 
     const name = await getLocalStorageValue('name');
     const discordImage = await getLocalStorageValue('discordImage');
@@ -42,7 +46,7 @@ async function artShare(data, webhook, type) {
             url: data.artUrl,
             color: 7506394,
             author: {
-              profileName: data.profileName,
+              name: data.profileName,
               url: data.profileLink,
               icon_url: urls[1]
             },
