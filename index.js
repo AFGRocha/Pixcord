@@ -5,18 +5,20 @@ window.addEventListener('DOMContentLoaded', event => {
 
 function onclick() {
   chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      'https://discordapp.com/api/webhooks/547508568849383426/3ceqXPSXNmnEHikyR65GL0UHTJoASHZWeu49Re5IhBYszSjMwDv8hfspWFso_SoQ4SBI'
-    );
+    chrome.tabs.sendMessage(tabs[0].id, {
+      webhook:
+        'https://discordapp.com/api/webhooks/547508568849383426/3ceqXPSXNmnEHikyR65GL0UHTJoASHZWeu49Re5IhBYszSjMwDv8hfspWFso_SoQ4SBI',
+      type: 'sfw'
+    });
   });
 }
 
 function onclickNSFW() {
   chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      'https://discordapp.com/api/webhooks/738107690672324639/GQeX-g04uhrHrLbxM4qV2E1ePRbUeXZd9xwX7lJCVcJDtrY-Bs3pSA15mm2cjoewQjxb'
-    );
+    chrome.tabs.sendMessage(tabs[0].id, {
+      webhook:
+        'https://discordapp.com/api/webhooks/738107690672324639/GQeX-g04uhrHrLbxM4qV2E1ePRbUeXZd9xwX7lJCVcJDtrY-Bs3pSA15mm2cjoewQjxb',
+      type: 'nsfw'
+    });
   });
 }
