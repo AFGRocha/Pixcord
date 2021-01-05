@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   //Beta for the share button inside the page
-  if (request === 'pixiv page') {
+  if (request === 'pixiv artwork page') {
     makeButtons();
   } else if (request.webhook) {
     sendData(request.webhook, request.type);
@@ -88,23 +88,38 @@ function getArtInfo() {
     title
   };
 }
-async function getImg64(img) {
+const compressImage = async url => {
+  const res = await fetch(url);
+  const blob = await res.blob();
   return new Promise((resolve, reject) => {
     let image = new Image();
-    image.src = 'https://cors-anywhere.herokuapp.com/' + img.src;
-    image.crossOrigin = 'anonymous';
-    image.onload = () => {
+    image.src = URL.createObjectURL(blob);
+
+    image.onload = function () {
       let canvas = document.createElement('CANVAS');
       const ctx = canvas.getContext('2d');
       canvas.height = image.height;
       canvas.width = image.width;
       ctx.drawImage(image, 0, 0);
-      const dataURL = canvas.toDataURL('image/jpeg', 0.6);
-      canvas = null;
+      const dataURL = canvas.toDataURL('image/jpeg', 0.7);
       resolve(dataURL);
     };
+    image.onerror = () => reject('Failed to load image to compress');
   });
-}
+};
+
+const toDataURL = url =>
+  fetch(url)
+    .then(response => response.blob())
+    .then(
+      blob =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        })
+    );
 
 async function sendData(webhook, type) {
   let button =
@@ -123,8 +138,8 @@ async function sendData(webhook, type) {
   } = getArtInfo();
 
   try {
-    art64 = await getImg64(art);
-    profile64 = await getImg64(profileImg);
+    art64 = await compressImage(art.src);
+    profile64 = await compressImage(profileImg.src);
 
     chrome.runtime.sendMessage(
       {
