@@ -8,6 +8,8 @@ chrome.runtime.onMessage.addListener(function (res) {
             button = document.getElementById("PixcordSFW");
             else if (type == "nsfw")
             button = document.getElementById("PixcordNSFW")
+            else if (type == "nega")
+            button = document.getElementById("PixcordNEGA")
 
             button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">'
             var request = new XMLHttpRequest();
@@ -23,7 +25,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             xhr.setRequestHeader('Authorization', 'Client-ID d2906dca59f16f0');
 
             var dataFields = new FormData();
-            dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 fvHoJ')[0].src);
+            dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 dpYYLs')[0].src);
             dataFields.append('type', 'URL');
             xhr.send(dataFields)
 
@@ -33,7 +35,7 @@ chrome.runtime.onMessage.addListener(function (res) {
 
 
             let firstStep = document.getElementsByClassName('sc-1asno00-0 iyBsWP')[0].innerHTML.replace('<img src="', '');
-            let profileImg = firstStep.replace('" width="40" height="40" alt="' + document.getElementsByClassName('sc-fzozJi iFrcHJ')[0].innerHTML + '" style="object-fit: cover; object-position: center top;">', '')
+            let profileImg = firstStep.replace('" width="40" height="40" alt="' + document.getElementsByClassName('sc-fzozJi daCWkW')[0].innerHTML + '" style="object-fit: cover; object-position: center top;">', '')
             var dataFields2 = new FormData();
             dataFields2.append('image', profileImg);
             dataFields2.append('type', 'URL');
@@ -67,8 +69,8 @@ chrome.runtime.onMessage.addListener(function (res) {
                                     "url": location.href,
                                     "color": 7506394,
                                     "author": {
-                                        "name": document.getElementsByClassName('sc-fzozJi iFrcHJ')[0].innerHTML,
-                                        "url": document.getElementsByClassName('sc-fzozJi iFrcHJ')[0].href,
+                                        "name": document.getElementsByClassName('sc-fzozJi daCWkW')[0].innerHTML.replace("<div>","").replace("</div>",""),
+                                        "url": document.getElementsByClassName('sc-fzozJi daCWkW')[0].href,
                                         "icon_url": profileJSON.data.link
                                     },
                                     "footer": {
@@ -131,6 +133,22 @@ chrome.runtime.onMessage.addListener(function (res) {
             nsfw.appendChild(t2);  // Append the text to <p>
             divNSFW.appendChild(nsfw)
             document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divNSFW);           // Append to <div>
+
+            //Third Div
+            let divNEGA = document.createElement("div");
+            divNEGA.className = "sc-181ts2x-3 iujCSd"
+
+            //Nega EN
+            let nega = document.createElement("BUTTON");  // Create a <button> node
+            nega.setAttribute("id", "PixcordNEGA")
+            nega.onclick = function () {
+                artShare("https://discord.com/api/webhooks/835918455503978606/ixOZ3mP78Ph_akUrBz53WWKJ4bQ95xOcBKsJlTYGdgNYkZLSyZQ5YePylQDVQ0RCvWLn","nega")
+            };
+            let t3 = document.createTextNode("Share to AAAAA");      // Create a text node
+            nega.appendChild(t3);  // Append the text to <p>
+            divNEGA.appendChild(nega)
+            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divNEGA);           // Append to <div>
+
         }
     } else{ //Sharing through the popup
         var request = new XMLHttpRequest();
@@ -146,7 +164,7 @@ chrome.runtime.onMessage.addListener(function (res) {
         xhr.setRequestHeader('Authorization', 'Client-ID d2906dca59f16f0');
 
         var dataFields = new FormData();
-        dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 fvHoJ')[0].src);
+        dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 dpYYLs')[0].src);
         dataFields.append('type', 'URL');
         xhr.send(dataFields)
 
@@ -157,7 +175,7 @@ chrome.runtime.onMessage.addListener(function (res) {
 
         let firstStep = document.getElementsByClassName('sc-1asno00-0 iyBsWP')[0].innerHTML.replace('<img src="', '');
         console.log(firstStep)
-        let profileImg = firstStep.replace('" width="40" height="40" alt="' + document.getElementsByClassName('sc-fzozJi iFrcHJ')[0].innerHTML + '" style="object-fit: cover; object-position: center top;">', '')
+        let profileImg = firstStep.replace('" width="40" height="40" alt="' + document.getElementsByClassName('sc-fzozJi daCWkW')[0].innerHTML + '" style="object-fit: cover; object-position: center top;">', '')
         var dataFields2 = new FormData();
         dataFields2.append('image', profileImg);
         dataFields2.append('type', 'URL');
@@ -191,8 +209,8 @@ chrome.runtime.onMessage.addListener(function (res) {
                                 "url": location.href,
                                 "color": 7506394,
                                 "author": {
-                                    "name": document.getElementsByClassName('sc-fzozJi iFrcHJ')[0].innerHTML,
-                                    "url": document.getElementsByClassName('sc-fzozJi iFrcHJ')[0].href,
+                                    "name": document.getElementsByClassName('sc-fzozJi daCWkW')[0].innerHTML,
+                                    "url": document.getElementsByClassName('sc-fzozJi daCWkW')[0].href,
                                     "icon_url": profileJSON.data.link
                                 },
                                 "footer": {
