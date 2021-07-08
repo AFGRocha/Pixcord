@@ -14,8 +14,9 @@ That's where **Pixcord** comes in! Pixcord is a Chrome extension (compatible wit
 
 ## How it works
 
-Pixcord works with using Discord webhooks, by uploading the images to a server ( in this case I'm using Imgur) and then creating an embed with those images and sending them throught the webhook it allows us to bypass Pixiv's extremely poor previews.
+Pixcord works with using Discord webhooks, by uploading the images to a server ( in the example I'm using Imgur) and then creating an embed with those images and sending them throught the webhook it allows us to bypass Pixiv's extremely poor previews.
 
-This come with an issue however, due to the fact I'm using imgur there is a rate limit.
+Currently the main branch is using Cloudinary, however it seems there might be compatibility issues as in some computeres the extension hasn't worked.
+There is however a branch with the old imgur method, this come with an issue however, due to the fact that imgur has a rate limit.
 If you choose spam the extension, let's say share 15 images almost immediatly after one another, due to Imgur's API rate limit you will be blocked from it for the remainder of the day making it impossible to share the images on Discord.
 Currently working on a solution.
