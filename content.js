@@ -28,7 +28,7 @@ function makeButtons() {
     sfw.appendChild(t); // Append the text to <p>
     divSFW.appendChild(sfw);
     document
-      .getElementsByClassName('sc-181ts2x-0 jPZrYy')[0]
+      .getElementsByClassName('sc-181ts2x-0 gMEAWM')[0]
       .appendChild(divSFW); // Append to <div>
 
     //Second div
@@ -50,7 +50,7 @@ function makeButtons() {
     nsfw.appendChild(t2); // Append the text to <p>
     divNSFW.appendChild(nsfw);
     document
-      .getElementsByClassName('sc-181ts2x-0 jPZrYy')[0]
+      .getElementsByClassName('sc-181ts2x-0 gMEAWM')[0]
       .appendChild(divNSFW); // Append to <div>
   }
 }
