@@ -107,7 +107,7 @@ chrome.runtime.onMessage.addListener(function (res) {
         if(!document.getElementById("PixcordSFW")){
             //Creating the first div
             let divSFW = document.createElement('div');
-            divSFW.className = 'sc-181ts2x-3 iujCSd';
+            divSFW.className = 'sc-181ts2x-3 cXSAgn';
 
             //SFW Button
             let sfw = document.createElement('BUTTON'); // Create a <button> node
@@ -124,7 +124,7 @@ chrome.runtime.onMessage.addListener(function (res) {
 
             //Second div
             let divNSFW = document.createElement('div');
-            divNSFW.className = 'sc-181ts2x-3 iujCSd';
+            divNSFW.className = 'sc-181ts2x-3 cXSAgn';
 
             //NSFW Button
             let nsfw = document.createElement('BUTTON'); // Create a <button> node
@@ -142,7 +142,7 @@ chrome.runtime.onMessage.addListener(function (res) {
 
             //Third Div
             let divNEGA = document.createElement("div");
-            divNEGA.className = "sc-181ts2x-3 iujCSd"
+            divNEGA.className = "sc-181ts2x-3 cXSAgn"
 
             //Nega EN
             let nega = document.createElement("BUTTON");  // Create a <button> node
