@@ -25,7 +25,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             xhr.setRequestHeader('Authorization', 'Client-ID d2906dca59f16f0');
 
             var dataFields = new FormData();
-            dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 dpYYLs')[0].src);
+            dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 jOmqKq')[0].src);
             dataFields.append('type', 'URL');
             xhr.send(dataFields)
 
@@ -116,7 +116,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             let t = document.createTextNode("Share to #art");      // Create a text node
             sfw.appendChild(t);                                          // Append the text to <p>
             divSFW.appendChild(sfw);
-            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divSFW);           // Append to <div>
+            document.getElementsByClassName("sc-181ts2x-0 gMEAWM")[0].appendChild(divSFW);           // Append to <div>
 
             //Second div
             let divNSFW = document.createElement("div");
@@ -131,7 +131,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             let t2 = document.createTextNode("Share to #NSFW");      // Create a text node
             nsfw.appendChild(t2);  // Append the text to <p>
             divNSFW.appendChild(nsfw)
-            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divNSFW);           // Append to <div>
+            document.getElementsByClassName("sc-181ts2x-0 gMEAWM")[0].appendChild(divNSFW);           // Append to <div>
 
             //Third Div
             let divNEGA = document.createElement("div");
@@ -146,7 +146,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             let t3 = document.createTextNode("Share to AAAAA");      // Create a text node
             nega.appendChild(t3);  // Append the text to <p>
             divNEGA.appendChild(nega)
-            document.getElementsByClassName("sc-181ts2x-0 jPZrYy")[0].appendChild(divNEGA);           // Append to <div>
+            document.getElementsByClassName("sc-181ts2x-0 gMEAWM")[0].appendChild(divNEGA);           // Append to <div>
 
         }
     } else{ //Sharing through the popup
@@ -163,7 +163,7 @@ chrome.runtime.onMessage.addListener(function (res) {
         xhr.setRequestHeader('Authorization', 'Client-ID d2906dca59f16f0');
 
         var dataFields = new FormData();
-        dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 dpYYLs')[0].src);
+        dataFields.append('image', document.getElementsByClassName('sc-1qpw8k9-1 jOmqKq')[0].src);
         dataFields.append('type', 'URL');
         xhr.send(dataFields)
 
