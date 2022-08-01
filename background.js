@@ -33,7 +33,7 @@ async function artShare(data, webhook, type) {
 
     var params = {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       method: 'POST',
       body: JSON.stringify({
@@ -48,18 +48,18 @@ async function artShare(data, webhook, type) {
             author: {
               name: data.profileName,
               url: data.profileLink,
-              icon_url: urls[1]
+              icon_url: urls[1],
             },
             footer: {
-              text: 'Pixcord developed by @DaikiPT'
+              text: 'Pixcord developed by @DaikiPT',
             },
             timestamp: new Date(),
             image: {
-              url: urls[0]
-            }
-          }
-        ]
-      })
+              url: urls[0],
+            },
+          },
+        ],
+      }),
     };
 
     const res = await fetch(webhook, params);
@@ -82,15 +82,17 @@ async function dataUrlToFile(dataUrl, fileName) {
 async function upload(files) {
   let formData = new FormData();
   return await Promise.all(
-    files.map(async file => {
+    files.map(async (file) => {
       formData.append('file', file);
       formData.append('upload_preset', 'pixcord');
-      const res = await fetch(
-        'https://api.cloudinary.com/v1_1/dxxvlmkqg/image/upload',
-        { method: 'POST', body: formData }
-      );
-      const body = await res.text();
-      return JSON.parse(body).url;
+      const res = await fetch('https://pixcord-uploader.vercel.app', {
+        method: 'POST',
+        body: formData,
+      }).catch((err) => {
+        console.log('upload err', err);
+      });
+      const body = await res.json();
+      return body?.url;
     })
   );
 }
