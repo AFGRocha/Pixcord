@@ -43,7 +43,7 @@ function makeButtons() {
       let button = document.getElementById('PixcordSFW');
       button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
       sendData(
-        'https://discordapp.com/api/webhooks/547508568849383426/3ceqXPSXNmnEHikyR65GL0UHTJoASHZWeu49Re5IhBYszSjMwDv8hfspWFso_SoQ4SBI',
+        'https://discord.com/api/webhooks/1007964692561539173/FsiPgYnmxdtxYaQkVTpo5966x8Sc6GCJ9cfUoa4OPnrTeya1wvITUSzuH7u8qJlHdtRz',
         'sfw'
       );
     };
@@ -51,7 +51,7 @@ function makeButtons() {
       let button = document.getElementById('PixcordNSFW');
       button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
       sendData(
-        'https://discordapp.com/api/webhooks/738107690672324639/GQeX-g04uhrHrLbxM4qV2E1ePRbUeXZd9xwX7lJCVcJDtrY-Bs3pSA15mm2cjoewQjxb',
+        'https://discord.com/api/webhooks/1007964849168457748/DIJ6diBSJQlQiwbVYLLphqRAhlEaAPd9840E-7iqHsYUM0HkF-HUpSNuLV0QsvROtgFt',
         'nsfw'
       );
     };
