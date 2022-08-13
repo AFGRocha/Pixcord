@@ -113,7 +113,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             let sfw = document.createElement('BUTTON'); // Create a <button> node
             sfw.setAttribute('id', 'PixcordSFW');
             sfw.onclick = function () {
-            artShare("https://discordapp.com/api/webhooks/547508568849383426/3ceqXPSXNmnEHikyR65GL0UHTJoASHZWeu49Re5IhBYszSjMwDv8hfspWFso_SoQ4SBI","sfw")
+            artShare("https://discord.com/api/webhooks/1007964692561539173/FsiPgYnmxdtxYaQkVTpo5966x8Sc6GCJ9cfUoa4OPnrTeya1wvITUSzuH7u8qJlHdtRz","sfw")
             };
             let t = document.createTextNode('Share to #art'); // Create a text node
             sfw.appendChild(t); // Append the text to <p>
@@ -130,7 +130,7 @@ chrome.runtime.onMessage.addListener(function (res) {
             let nsfw = document.createElement('BUTTON'); // Create a <button> node
             nsfw.setAttribute('id', 'PixcordNSFW');
             nsfw.onclick = function () {
-            artShare("https://discordapp.com/api/webhooks/738107690672324639/GQeX-g04uhrHrLbxM4qV2E1ePRbUeXZd9xwX7lJCVcJDtrY-Bs3pSA15mm2cjoewQjxb","nsfw")
+            artShare("https://discord.com/api/webhooks/1007964849168457748/DIJ6diBSJQlQiwbVYLLphqRAhlEaAPd9840E-7iqHsYUM0HkF-HUpSNuLV0QsvROtgFt","nsfw")
             };
             
             let t2 = document.createTextNode('Share to #NSFW'); // Create a text node
