@@ -12,6 +12,8 @@ chrome.runtime.onMessage.addListener(function (req, sender, sendResponse) {
   }
 });
 
+const ENDPOINT = 'https://pixcord-uploader.vercel.app';
+
 async function artShare(data, webhook, type) {
   try {
     console.log('data: ', data);
@@ -31,7 +33,7 @@ async function artShare(data, webhook, type) {
     const name = await getLocalStorageValue('name');
     const discordImage = await getLocalStorageValue('discordImage');
 
-    var params = {
+    const params = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -64,12 +66,15 @@ async function artShare(data, webhook, type) {
 
     const res = await fetch(webhook, params);
 
-    if (res.status === 204) {
-      return { message: 'success', type };
+    if ([200, 204].includes(res.status)) {
+      return { status: 'success' };
+    } else {
+      deleteImages(urls);
+      return { status: 'error', message: (await res.json()).message };
     }
   } catch (error) {
     console.error({ error });
-    return { message: 'error' };
+    return { status: 'error' };
   }
 }
 
@@ -80,12 +85,12 @@ async function dataUrlToFile(dataUrl, fileName) {
 }
 
 async function upload(files) {
-  let formData = new FormData();
   return await Promise.all(
     files.map(async (file) => {
+      const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', 'pixcord');
-      const res = await fetch('https://pixcord-uploader.vercel.app', {
+      const res = await fetch(ENDPOINT, {
         method: 'POST',
         body: formData,
       }).catch((err) => {
@@ -95,6 +100,17 @@ async function upload(files) {
       return body?.url;
     })
   );
+}
+
+async function deleteImages(urls) {
+  fetch(ENDPOINT, {
+    method: 'DELETE',
+    body: JSON.stringify({ urls }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
 }
 
 async function getLocalStorageValue(key) {
