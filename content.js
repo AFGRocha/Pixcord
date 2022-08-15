@@ -155,14 +155,11 @@ async function sendData(webhook, type) {
         type,
       },
       function (res) {
-        const button =
-          res.type === 'sfw'
-            ? document.querySelector('#PixcordSFW')
-            : document.querySelector('#PixcordNSFW');
-        if (res.message === 'success') {
+        if (res.status === 'success') {
           button.innerHTML = '✔️Shared';
         } else {
-          button.innerHtml = '❌Error';
+          console.log('Error uploading to Pixcord:', res.message);
+          button.innerHTML = '❌Error';
         }
       }
     );
