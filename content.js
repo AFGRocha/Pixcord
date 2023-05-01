@@ -17,26 +17,31 @@ function makeButtons() {
     //Creating containers
     let sfwDiv = document.createElement('div');
     let nsfwDiv = document.createElement('div');
-
+    let negaDiv = document.createElement('div');
+    sfwDiv.className = 'sc-181ts2x-3 cXSAgn';
+    nsfwDiv.className = 'sc-181ts2x-3 cXSAgn';
+    negaDiv.className = 'sc-181ts2x-3 cXSAgn';
+  
     // Buttons
     let sfw = document.createElement('BUTTON');
     let nsfw = document.createElement('BUTTON');
-    sfwDiv.appendChild(sfw);
+    let nega = document.createElement('BUTTON');
     nsfwDiv.appendChild(nsfw);
-
-    // Classnames/Styles
-    sfw.style = 'padding: .5rem';
-    nsfw.style = 'padding: .5rem';
-
+    sfwDiv.appendChild(sfw);
+    negaDiv.appendChild(nega)
+    
     // Attributes
     sfw.setAttribute('id', 'PixcordSFW');
     nsfw.setAttribute('id', 'PixcordNSFW');
+    nega.setAttribute("id", "PixcordNEGA")
 
     // Text
     let sfwText = document.createTextNode('Share to #art');
     let nsfwText = document.createTextNode('Share to #NSFW');
+    let negaText = document.createTextNode('Share to AAAAA');
     sfw.appendChild(sfwText);
     nsfw.appendChild(nsfwText);
+    nega.appendChild(negaText);
 
     // On Click
     sfw.onclick = function () {
@@ -56,9 +61,20 @@ function makeButtons() {
       );
     };
 
+    nega.onclick = function () {
+      let button = document.getElementById('PixcordNEGA');
+      button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
+      sendData(
+        'https://discord.com/api/webhooks/835918455503978606/ixOZ3mP78Ph_akUrBz53WWKJ4bQ95xOcBKsJlTYGdgNYkZLSyZQ5YePylQDVQ0RCvWLn',
+        'nega'
+      );
+    };
+
     // Append final result
-    wrapper.appendChild(nsfwDiv);
     wrapper.appendChild(sfwDiv);
+    wrapper.appendChild(nsfwDiv);
+    wrapper.appendChild(negaDiv);
+    
   }
 }
 
@@ -92,11 +108,12 @@ const compressImage = async (url) => {
   try {
     if (!url) return Promise.resolve('');
 
-    const res = await fetch(url);
-    const blob = await res.blob();
+    // const res = await fetch(url);
+    // const blob = await res.blob();
     return new Promise((resolve, reject) => {
       let image = new Image();
-      image.src = URL.createObjectURL(blob);
+      image.crossOrigin="anonymous"
+      image.src = 'https://cors-anywhere.herokuapp.com/' + url;
 
       image.onload = function () {
         let canvas = document.createElement('CANVAS');
@@ -128,10 +145,20 @@ const toDataURL = (url) =>
     );
 
 async function sendData(webhook, type) {
-  let button =
-    type === 'sfw'
-      ? document.getElementById('PixcordSFW')
-      : document.getElementById('PixcordNSFW');
+  let button = ''
+  
+  switch (type) {
+    case 'sfw':
+      button = document.getElementById('PixcordSFW')
+      break;
+    case 'nsfw':
+      button = document.getElementById('PixcordNSFW')
+      break;
+    case 'nega':
+      button = document.getElementById('PixcordNEGA')
+      break;
+  }
+
   button.innerHTML = '<img src="https://i.imgur.com/4LBBzRr.gif">';
 
   const { artUrl, profileLink, profileImg, profileName, art, title } =

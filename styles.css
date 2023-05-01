@@ -10,6 +10,12 @@
     border: none;
 }
 
+#PixcordNEGA {
+  background: green;
+  border-radius: 8px;
+  border: none;
+}
+
 
 .spinning-loader {
     width: 20px;
