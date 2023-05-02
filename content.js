@@ -113,7 +113,7 @@ const compressImage = async (url) => {
     return new Promise((resolve, reject) => {
       let image = new Image();
       image.crossOrigin="anonymous"
-      image.src = 'https://cors-anywhere.herokuapp.com/' + url;
+      image.src = 'https://proxy.cors.sh/' + url;
 
       image.onload = function () {
         let canvas = document.createElement('CANVAS');
