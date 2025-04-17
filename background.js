@@ -17,18 +17,18 @@ const ENDPOINT = 'https://pixcord-uploader.vercel.app';
 async function artShare(data, webhook, type) {
   try {
     console.log('data: ', data);
-    const artFile = await dataUrlToFile(
-      data.art,
-      `${data.profileName} - ${data.title}`
-    );
-    const iconFile = await dataUrlToFile(
-      data.profileImg,
-      `${data.profileName}`
-    );
+    // const artFile = await dataUrlToFile(
+    //   data.art,
+    //   `${data.profileName} - ${data.title}`
+    // );
+    // const iconFile = await dataUrlToFile(
+    //   data.profileImg,
+    //   `${data.profileName}`
+    // );
 
-    const files = [artFile, iconFile];
-    const urls = await upload(files);
-    console.log('urls: ', urls);
+    // const files = [artFile, iconFile];
+    // const urls = await upload(files);
+    // console.log('urls: ', urls);
 
     const name = await getLocalStorageValue('name');
     const discordImage = await getLocalStorageValue('discordImage');
@@ -41,31 +41,31 @@ async function artShare(data, webhook, type) {
       body: JSON.stringify({
         username: name,
         avatar_url: discordImage,
-        content: '',
-        embeds: [
-          {
-            title: data.title,
-            url: data.artUrl,
-            color: 7506394,
-            author: {
-              name: data.profileName,
-              url: data.profileLink,
-              icon_url: urls[1],
-            },
-            footer: {
-              text: 'Pixcord developed by @DaikiPT',
-            },
-            timestamp: new Date(),
-            image: {
-              url: urls[0],
-            },
-          },
-        ],
+        content: data.artUrl.replace("pixiv", "phixiv"),
+        // embeds: [
+        //   {
+        //     title: data.title,
+        //     url: data.artUrl,
+        //     color: 7506394,
+        //     author: {
+        //       name: data.profileName,
+        //       url: data.profileLink,
+        //       icon_url: urls[1],
+        //     },
+        //     footer: {
+        //       text: 'Pixcord developed by @DaikiPT',
+        //     },
+        //     timestamp: new Date(),
+        //     image: {
+        //       url: urls[0],
+        //     },
+        //   },
+        // ],
       }),
     };
 
     const res = await fetch(webhook, params);
-
+    console.log(res)
     if ([200, 204].includes(res.status)) {
       return { status: 'success' };
     } else {
